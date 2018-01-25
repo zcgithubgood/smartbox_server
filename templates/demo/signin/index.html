@@ -1,0 +1,49 @@
+{% extends 'demo/base.html' %}
+
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
+{% block title %}<p class="text-left"><stroBng>春雨港湾</stroBng></p>{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+         <div class="row">
+            <div class="col-sm-5 col-md-6 col-md-offset-2">
+
+                <h1 class="text-center login-title">智能药箱</h1>
+
+                <div class="account-wall">
+                    <form class="form-signin">
+
+                    <input type="text" name='user', class="form-control" placeholder="手机/邮箱/用户名" required autofocus>
+                    <input type="password" name='passwd', " class="form-control" placeholder="密码" required>
+
+                    <div class="checkbox pull-left">
+                        <label>
+                            <input type="checkbox" value="remember-me"> 记住我
+                        </label>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+
+                    <a href="#" class="pull-right need-help">帮助</a><span class="clearfix"></span>
+
+                    </form>
+                </div>
+                <a href="#" class="text-center new-account">注册</a>
+            </div> <!-- /container -->
+        </div>
+    </div>
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+
+
+{% endblock %}

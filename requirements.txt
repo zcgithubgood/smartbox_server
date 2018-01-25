@@ -1,0 +1,13 @@
+django==1.5.5
+twisted==12.3.0
+mysql-python==1.2.4
+south==0.7.6
+protobuf==2.6.0
+pytz==2015.2
+django-bootstrap3==6.1.0
+uwsgi==2.0.11.1
+django-excel==0.0.2
+xlrd==0.9.4
+xlwt==1.0.0
+django-admin-bootstrapped==1.6.0
+

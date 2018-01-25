@@ -1,0 +1,171 @@
+package box;
+
+message ResponseCode {
+    required int32 code = 1;
+}
+
+message HeartBeat{
+    optional int64 calibrated_time = 1;
+}
+
+message ReserveInfo {
+    optional string phone = 1;
+}
+
+message BasicInfo {
+    optional string mobile = 1;
+    optional string imsi = 2;
+    optional string imei = 3;
+    optional string iccid = 4;
+    repeated string base_station = 5;
+    optional string serial_number = 6;
+    optional string hardware_ver = 7;
+    optional string firmware_ver = 8;
+    optional string protocol_ver = 9;
+    optional int64 produce_time = 10;
+}
+
+message Status {
+    optional int32 power = 1;
+    optional int32 battery = 2;
+    optional int32 sensor = 3;
+    optional int32 comm = 4;
+    optional int32 audio = 5;
+    optional int32 service_light = 6;
+    repeated int32 bg_light = 7;
+    repeated int32 time_light = 8;
+    repeated int32 weight_status = 9;    //Unchanged(0)/Increase (1)/Reduce(2)/ NoConfig(3)
+    optional int32 remind = 10;
+    //optional int64 logged_time = 10;
+    //optional int32 grade = 11;         //当前药箱设置的级别。
+}
+
+message SlotWeights{
+    optional uint32  position = 1;       //放在药仓的位置
+    repeated uint32 weight = 2;
+    optional uint32 grade = 3;           //当前药箱设置的级别
+}
+
+message Record {
+    optional int32 cover = 1;
+    repeated uint32 weight = 2;
+    optional int32 cover_status = 3;
+    optional int64 open_time = 4;
+    optional int64 close_time = 5;
+    optional int64 logged_time = 6;
+    repeated SlotWeights slot_weights = 7;
+}
+
+message OpBind {
+    optional string userid = 1;
+}
+
+message OpUnbind {
+    optional string userid = 1;
+}
+
+message MedicineTime {
+    optional int32 period = 1;
+    optional int32 time = 2;
+    optional int32 meals = 3;            //饭前、饭中、饭后
+    optional bytes dose_text = 4;        //服药文本（剂量+单位 例如:半片 四分之一片 13片）
+}
+
+message OpConfig {
+    optional int32 medicine_id = 1;
+    optional bytes medicine = 2;
+    //optional bytes dose_text = 3;      //服药文本（剂量+单位 例如:半片 四分之一片 13片）
+    optional uint32 stweight = 3;        //标准重量
+    optional uint32  position = 4;       //放在药仓的位置
+    repeated MedicineTime schedules = 5; //早、中、晚、深夜
+    optional uint32 remind_threshold = 6;
+    optional uint32 grade = 7;           //等级，1级:关闭提醒缺药，药箱开盖儿设置为提醒吃药；2级:正常工作流程。
+}
+
+message OpAudio {
+    optional int32 index = 1;
+    optional bytes text = 2;
+}
+
+message OpVolume {
+    optional int32 volume = 1;
+}
+
+message OpLight {
+    optional int32 power = 1;
+    optional int32 service = 2;
+    repeated int32 backgrounds = 3;
+    repeated int32 timelights = 4;
+}
+
+message Upgrade{
+    optional int32 oldverlength = 1;              //旧版本的文件长度
+    optional int64 updatetime = 2;                //更新时间，从零点到更新时间的分钟数
+    optional int32 updatemode = 3;                //更新方式，1:强制更新 2:定时更新
+}
+
+message OpFunswitch {
+    optional int32 supplement = 1;
+    optional int32 forget = 2;
+    optional int32 sos = 3;
+}
+
+message Operation {
+    required int32 type = 1;
+    optional uint32 op_id = 2;                 //自增id，在OpResult中传输回来，区别哪条命令操作成功了。
+    optional OpBind bind = 3;
+    optional OpUnbind unbind = 4;
+    repeated OpConfig config = 5;
+    optional OpAudio audio = 6;
+    optional OpVolume volume = 7;
+    optional OpLight light = 8;
+    optional Upgrade upgrade = 9;
+    optional OpFunswitch funswitch = 10;
+
+}
+
+message OpResult {
+    required int32 type = 1;
+    optional uint32 op_id = 2;
+    optional int64 timestamp = 3;
+    optional int32 result = 4;
+    optional string reason = 5;
+}
+
+message Extakens{
+    optional int32 medicine_id = 1;
+    optional int32 time = 2;
+    optional uint32  position = 3;       //对应药仓的位置
+}
+
+message Power{
+    optional string reason = 1;
+}
+
+message Signal{
+    optional string reason = 1;
+}
+
+message Scales{
+    optional int32 scaleid = 1;
+    optional string reason = 2;
+}
+
+message Sos{
+    optional string reason = 1;
+}
+
+message Exception {
+    required int32 type = 1;
+    repeated Extakens takens = 2; // 对应的药箱里面的药是否已经被服用；
+    optional Power power = 3;     // 断电异常
+    optional Signal signal = 4;   // 通信异常
+    repeated Scales scales = 5;   // 称异常
+    optional Sos sos = 6;         // 推倒呼救
+}
+
+message UpgradeInfo {
+    required bool available = 1;
+    repeated string files = 2;
+    optional string checksum = 3;
+}

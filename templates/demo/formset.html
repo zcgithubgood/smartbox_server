@@ -1,0 +1,21 @@
+{% extends 'demo/base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}
+    用户设置
+{% endblock %}
+
+{% block content %}
+    {% bootstrap_formset_errors form %}
+    <form role="form" method="post">
+        {% csrf_token %}
+        <!--
+        {% bootstrap_formset form layout='horizontal'%}
+        -->
+        {% bootstrap_formset form %}
+
+        {% buttons submit='确定' reset="取消" %}{% endbuttons %}
+    </form>
+
+{% endblock %}

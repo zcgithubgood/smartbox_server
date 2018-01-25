@@ -1,0 +1,30 @@
+{% extends 'demo/bootstrap.html' %}
+
+{% load url from future %}
+{% load bootstrap3 %}
+{% block bootstrap3_content %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!--
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    -->
+    <div class="container">
+        <h1>{% block title %}(no title){% endblock %}</h1>
+
+
+
+        <p class="lead">
+            <a href="{% url 'signin' %}"></a>
+
+            <!--
+            <a href="{% url 'upload' %}">上传升级文件</a>
+            -->
+
+
+        </p>
+
+        {% bootstrap_messages %}
+
+        {% block content %}(no content){% endblock %}
+    </div>
+
+{% endblock %}

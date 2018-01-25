@@ -1,0 +1,94 @@
+{% extends 'demo/base.html' %}
+
+{% load bootstrap3 %}
+
+{% block title %}<p class="text-center"><strong>春雨智能药箱管理系统</strong></p>{% endblock %}
+
+{% block content %}
+<!--
+    This is <em>bootstrap3</em> for <strong>Django</strong>.
+-->
+    {% if errors %}
+        <ul>
+            {% for error in errors %}
+                <p style="color: red;">{{ error }}</p>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+    <!--
+    <form action="" method="get">
+        <input type="text" name="id">
+        <input type="submit" value="搜索">
+    </form>
+    -->
+    <form class="navbar-form navbar-left" role="search">
+        <p class="text-center">
+            <div class="form-group">
+                <input type="text" name='id' class="form-control" placeholder="Search">
+            </div>
+
+            <button type="submit" class="btn btn-primary">搜索</button>
+        </p>
+
+    </form>
+
+<!--
+<script type="text/javascript">
+    window.onload = function(){
+        alert("1 abc");
+        //1.获取a节点，并为其添加onclick响应函数
+        document.getElementsByTagName("a")[0].onclick = function(){
+            alert("2 abc");
+            //3.创建一个XMLHttpRequest对象
+            var request = new XMLHttpRequest();
+
+            //4.准备发送请求的数据:url
+            var url = this.href + "?time" + new Date();
+            var method = "GET";
+
+            //5.调用XMLHttpRequest对象的open方法
+            request.open(method,url);
+
+            //6.调用XMLHttpRequest对象的send方法
+            request.send(null);
+
+            //7.为XMLHttpRequest对象加onreadystatechange响应函数
+            request.onreadystatechange = function(){
+                //8.判断响应是否完成:XMLHttpRequest对象的readyState属性值为4的时候
+                if(request.readyState == 4){
+                    //9.再判断响应是否可用:XMLHttpRequest对象status属性的值为200
+                    if(request.status == 200 || request.status == 304){
+                        //10.打印响应结果:responseText
+                        alert(request.responseText);
+                    }
+                }
+            }
+            //2.取消a节点的默认行为
+            return false;
+        }
+    }
+</script>
+<body>
+    <a href="helloAjax.txt">HelloAjax</a>
+</body>
+<script>
+document.write("<h1>This is a heading</h1>");
+document.write("<p>This is a paragraph.</p>");
+</script>
+
+<script type="text/javascript", src="jquery-1.7.2.js"></script>
+<script type="text/javascript">
+    //$(funtion(){}) 相当于widow.onload，代码卸载{}之间
+    $(function(){
+        //1.选取button:$("button")
+        //2.为buttion添加onclick
+        //代码便携在function的｛｝
+        $("button").click(function(){
+            alert("helloworld");
+        });
+    })
+</script>
+-->
+{% endblock %}
+

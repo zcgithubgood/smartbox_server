@@ -1,0 +1,77 @@
+{% extends 'demo/base.html' %}
+
+{% load bootstrap3 %}
+
+{% block bootstrap3_content %}
+
+<p>你查找到: <strong>{{ id }}</strong></p>
+
+{% if deviceRecord %}
+    <p>找到 {{  deviceRecord|length }}个药箱基本信息{{ deviceRecord|pluralize }}.</p>
+
+    <table class="table table-hover ">
+        <ul>
+            <tr>
+                <!--
+                <th class="active">药箱设备ID</th>
+                <th class="active">手机号</th>
+                <th class="active">手机imsi</th>
+                <th class="active">手机imei</th>
+                <th class="active">手机iccid</th>
+                <th class="">基站信息</th>
+                <th class="active">产品序列号</th>
+                <th class="active">硬件版本号</th>
+                <th class="active">固件版本号</th>
+                <th class="active">协议版本号</th>
+                <th class="active">生成信息时间</th>
+                -->
+
+                <th class="active">设备ID</th>
+                <th class="active">箱盖状态</th>
+                <th class="active">盒盖打开时间</th>
+                <th class="active">盒盖关闭时间</th>
+                <th class="active">药盒重量</th>
+                <th class="active">过滤前的原始重量</th>
+                <th class="active">记录时间</th>
+                <th class="active">修改时间</th>
+
+            </tr>
+            {% for Info in deviceRecord%}
+		<tr>
+
+                <!--
+                <tr>
+                    <th>{{  Info.device_id }}</th>
+                    <th>{{  Info.mobile }}</th>
+                    <th>{{  Info.imsi }}</th>
+                    <th>{{  Info.imei }}</th>
+                    <th>{{  Info.iccid }}</th>
+                    <th>{{  Info.base_station }}</th>
+                    <th>{{  Info.serial_number }}</th>
+                    <th>{{  Info.hardware_ver }}</th>
+                    <th>{{  Info.firmware_ver }}</th>
+                    <th>{{  Info.protocol_ver }}</th>
+                    <th>{{  Info.produce_time }}</th>
+                </tr>
+                -->
+
+                    <th>{{  Info.device_id }}</th>
+                    <th>{{  Info.cover_status }}</th>
+                    <th>{{  Info.open_time }}</th>
+                    <th>{{  Info.close_time }}</th>
+                    <th>{{  Info.weights }}</th>
+                    <th>{{  Info.slot_weights }}</th>
+                    <th>{{  Info.intime }}</th>
+                    <th>{{  Info.modtime }}</th>
+		
+		</tr>
+
+            {% endfor %}
+        </ul>
+    </table>
+{% else %}     
+    <p>没有符合您搜索条件的.</p>
+{% endif %}
+
+{% endblock %}
+
